@@ -23,7 +23,7 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
     return <div>Loading...</div>;
   }
 
-  if (!data.length && query.search) {
+  if (!data?.length && query.search) {
     return (
       <div>
         <EmptySearch />
@@ -31,7 +31,7 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
     );
   }
 
-  if (!data.length && query.favorites) {
+  if (!data?.length && query.favorites) {
     return (
       <div>
         <EmptyFavorites />
@@ -39,7 +39,7 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
     );
   }
 
-  if (!data.length) {
+  if (!data?.length) {
     return (
       <div>
         <EmptyBoards />

@@ -1,20 +1,20 @@
 "use client";
-import { api } from "@/convex/_generated/api";
-import { useOrganization } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
+import { api } from "@/convex/_generated/api";
 import { useApiMutation } from "@/hooks/use-api-mutation";
+import { useOrganization } from "@clerk/nextjs";
 import Image from "next/image";
 import { toast } from "sonner";
 
 export const EmptyBoards = () => {
   const { organization } = useOrganization();
-  const { mutate, pending } = useApiMutation(api.board.create);
+  const { mutate: create, isLoading } = useApiMutation(api.board.create);
 
   const onClick = () => {
     if (!organization) return;
 
-    mutate({
+    create({
       orgId: organization.id,
       title: "Untitled",
     })
@@ -33,7 +33,7 @@ export const EmptyBoards = () => {
         Start by creating a board for your organization
       </p>
       <div className="mt-6">
-        <Button disabled={pending} onClick={onClick} size="lg">
+        <Button disabled={isLoading} onClick={onClick} size="lg">
           Create Board
         </Button>
       </div>
